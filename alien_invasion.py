@@ -4,6 +4,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 
+
 # class to manage overall behavior of the game
 class AlienInvasion:
 
@@ -18,13 +19,20 @@ class AlienInvasion:
     def run_game(self):
         # method for main loop of game
         while True:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
-            # redraws the screen for each iteration of the loop.
-            self.screen.fill(self.settings.bg_color)
-            # Makes the most recently drawn screen visable
-            pygame.display.flip()
+            self._check_events()
+            self._update_screen()
+
+    def _check_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+
+    def _update_screen(self):
+        # redraws the screen for each iteration of the loop.
+        self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()
+        # Makes the most recently drawn screen visable
+        pygame.display.flip()
 
 
 if __name__ == '__main__':
